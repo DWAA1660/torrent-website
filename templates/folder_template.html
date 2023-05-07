@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Flask Form Example</title>
+</head>
+<body>
+	<h1>Links</h1>
+    <ul>
+    {% for file in files %}
+        {% if file.endswith('.mp4') %}
+            <video src="{{ file }}" alt="Video">
+        {% else %}
+            <a href= {{ file }} download>{{ file }}</p>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</body>
+</html>

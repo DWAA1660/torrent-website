@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Flask Form Example</title>
+</head>
+<body>
+	<h1>Links</h1>
+    <ul>
+    {% for torrent in torrents %}
+        <li><a href="{{ url_for('torrent_folder', folder=torrent) }}">{{ torrent }}</a></li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
