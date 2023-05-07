@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, send_file
 import threading
 import libtorrent as lt
 from download_torrent import *
@@ -9,7 +9,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     torrents = []
-    for torrent in os.listdir("./finished_torents"):
+    for torrent in os.listdir("./static"):
         torrents.append(torrent)
     print(torrents)
     return render_template('index.html', torrents=torrents)
@@ -17,8 +17,14 @@ def index():
     
 @app.route('/torrent_folder/<folder>', methods=['GET', 'POST'])
 def torrent_folder(folder):
-    files = os.listdir(f"./finished_torents/{folder}")
-    return render_template("folder_template.html", files=files)
+    paths = []
+    files = os.listdir(f"./static/{folder}/")
+
+    for file in files:
+        paths.append(f'{file}')
+
+    print(paths)
+    return render_template("folder_template.html", files=files, folder=folder)
 
 @app.route('/torrent', methods=['GET', 'POST'])
 def torrent():
@@ -29,7 +35,6 @@ def torrent():
         task_thread.start()
         return f'Started downloading please give it some time'
     return render_template('form.html')
-
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -35,12 +35,12 @@ def download_torrent(url):
         # wait for a short time before checking again
         time.sleep(1)
 
-    os.mkdir(f"./finished_torents/{NAME}")
+    os.mkdir(f"./static/{NAME}")
     for file in os.listdir(f'./pending_torents/{id}'):
         file_path = os.path.join(f'./pending_torents/{id}', file)
 
     # Move the file to the destination directory
-        shutil.move(file_path, f"./finished_torents/{NAME}")
+        shutil.move(file_path, f"./static/{NAME}")
     os.rmdir(f"./pending_torents/{id}")
     print("\nDownload complete!")
 

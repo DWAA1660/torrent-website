@@ -10,9 +10,10 @@
         {% if file.endswith('.mp4') %}
             <video src="{{ file }}" alt="Video">
         {% else %}
-            <a href= {{ file }} download>{{ file }}</p>
+            <a href="/static/{{ folder }}/{{ file }}" download>{{ file }}</a></li>
         {% endif %}
         {% endfor %}
     </ul>
+    <a href="/static/crunchbang-11-20130506-i686.iso/crunchbang-11-20130506-i6867.iso">file</a>
 </body>
 </html>
