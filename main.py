@@ -1,8 +1,10 @@
-from flask import Flask, jsonify, render_template, request, send_file
+from flask import Flask, jsonify, render_template, request, send_file, Response
 import threading
 import libtorrent as lt
 from download_torrent import *
-
+import cv2 as cv
+from time import sleep
+import subprocess
 
 app = Flask(__name__)
 
@@ -36,5 +38,8 @@ def torrent():
         return f'Started downloading please give it some time'
     return render_template('form.html')
 
+@app.route('/video_feed/<folder>/<filename>')
+def video_feed(folder, filename):
+    return render_template("video.html", folder=folder, filename=filename)
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="192.168.1.240", port=5000)

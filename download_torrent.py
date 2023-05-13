@@ -4,6 +4,8 @@ import random
 import os
 import shutil
 import libtorrent as lt
+import ffmpeg
+import subprocess
 
 def generate_id():
     id = ""
@@ -41,6 +43,16 @@ def download_torrent(url):
 
     # Move the file to the destination directory
         shutil.move(file_path, f"./static/{NAME}")
+        if file_path.endswith(".mp4"):
+            input_file = f"./static/{NAME}"
+            output_file = f"./static/{NAME}_converted"
+
+            command = ['ffmpeg', '-i', input_file, '-c', 'copy', '-movflags', 'faststart', output_file]
+            subprocess.call(command)
+            os.remove(input_file)
+            
+            
+
     os.rmdir(f"./pending_torents/{id}")
     print("\nDownload complete!")
 

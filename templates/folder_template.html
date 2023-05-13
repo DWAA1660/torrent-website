@@ -8,9 +8,9 @@
     <ul>
     {% for file in files %}
         {% if file.endswith('.mp4') %}
-            <video src="{{ file }}" alt="Video">
+            <li><a href="{{ url_for('video_feed', folder=folder, filename=file) }}">{{ file }}</a></li>
         {% else %}
-            <a href="/static/{{ folder }}/{{ file }}" download>{{ file }}</a></li>
+    </li><a href="/static/{{ folder }}/{{ file }}" download>{{ file }}</a></li>
         {% endif %}
         {% endfor %}
     </ul>
