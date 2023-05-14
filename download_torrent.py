@@ -72,10 +72,10 @@ def download_torrent(url):
         # wait for a short time before checking again
         time.sleep(1)
 
-    for file in os.listdir(f"./pending-torents/{id}"):
-        file_path = os.path.join(f"./pending-torents/{id}", file)
+    for file in os.listdir(f"pending_torents/MtcnLIjD1IoRKM3QJY"):
+        file_path = os.path.join(f"./pending_torents/{id}", file)
         new_file = file.replace(".mkv", ".mp4")
-        convert_mkv_to_mp4(file_path, f"./pending-torents/{id}/{new_file}")
+        convert_mkv_to_mp4(file_path, f"./pending_torents/{id}/{new_file}")
 
     move_files_to_directory(id=id, NAME=NAME)
     
