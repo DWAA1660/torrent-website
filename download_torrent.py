@@ -44,9 +44,9 @@ def move_files_to_directory(id, NAME):
             subprocess.call(command)
             os.remove(input_file)
 
-def convert_mkv_to_mp4(input_file, output_file):
-    # Run the ffmpeg command to convert the file
-    subprocess.run(['ffmpeg', '-i', input_file, '-c', 'copy', output_file])
+# def convert_mkv_to_mp4(input_file, output_file):
+#     # Run the ffmpeg command to convert the file
+#     subprocess.run(['ffmpeg', '-i', input_file, '-c', 'copy', output_file])
         
         
 def download_torrent(url):
@@ -72,10 +72,10 @@ def download_torrent(url):
         # wait for a short time before checking again
         time.sleep(1)
 
-    for file in os.listdir(f"./pending_torents/{id}"):
-        file_path = os.path.join(f"./pending_torents/{id}", file)
-        new_file = file.replace(".mkv", ".mp4")
-        convert_mkv_to_mp4(file_path, f"./pending_torents/{id}/{new_file}")
+    # for file in os.listdir(f"./pending_torents/{id}"):
+    #     file_path = os.path.join(f"./pending_torents/{id}", file)
+    #     new_file = file.replace(".mkv", ".mp4")
+    #     convert_mkv_to_mp4(file_path, f"./pending_torents/{id}/{new_file}")
 
     move_files_to_directory(id=id, NAME=NAME)
     
