@@ -14,6 +14,36 @@ def generate_id():
         id = id + char
     return id
 
+def move_files_to_directory(id, NAME):
+    destination_dir = f"./static/{NAME}"
+    os.makedirs(destination_dir, exist_ok=True)
+    print("test")
+    source_dir = f"./pending_torents/{id}"
+    print(source_dir)
+    for thing in os.listdir(source_dir):
+        print(thing, "MAINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNn")
+        file_path = os.path.join(source_dir, thing)
+        if os.path.isfile(file_path):
+            print(thing, 3333333333333333333333)
+            file_to_move_path = os.path.join(destination_dir, thing)
+            shutil.move(file_path, file_to_move_path)
+        elif os.path.isdir(file_path):
+            print(thing, "IS A DIR!")
+            for file2 in os.listdir(file_path):
+                print(file2, 222222222222222222222222222)
+                file2_path = os.path.join(file_path, file2)
+                file2_dest_path = os.path.join(destination_dir, file2)
+                shutil.move(file2_path, file2_dest_path)
+
+    for potential_videos in os.listdir(f"./static/{NAME}"):
+        if potential_videos.endswith(".mp4"):
+            input_file = f"./static/{NAME}/{potential_videos}"
+            output_file = f"./static/{NAME}/converted-{potential_videos}"
+
+            command = ['ffmpeg', '-i', input_file, '-c', 'copy', '-movflags', 'faststart', output_file]
+            subprocess.call(command)
+            os.remove(input_file)
+        
 def download_torrent(url):
     id = generate_id()
     ses = lt.session()
@@ -37,22 +67,8 @@ def download_torrent(url):
         # wait for a short time before checking again
         time.sleep(1)
 
-    os.mkdir(f"./static/{NAME}")
-    for file in os.listdir(f'./pending_torents/{id}'):
-        file_path = os.path.join(f'./pending_torents/{id}', file)
+    move_files_to_directory(id=id, NAME=NAME)
 
-    # Move the file to the destination directory
-        shutil.move(file_path, f"./static/{NAME}")
-        if file_path.endswith(".mp4"):
-            input_file = f"./static/{NAME}"
-            output_file = f"./static/{NAME}_converted"
-
-            command = ['ffmpeg', '-i', input_file, '-c', 'copy', '-movflags', 'faststart', output_file]
-            subprocess.call(command)
-            os.remove(input_file)
-            
-            
-
-    os.rmdir(f"./pending_torents/{id}")
+    shutil.rmtree(f"./pending_torents/{id}")
     print("\nDownload complete!")
 

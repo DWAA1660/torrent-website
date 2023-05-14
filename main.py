@@ -21,6 +21,7 @@ def index():
 def torrent_folder(folder):
     paths = []
     files = os.listdir(f"./static/{folder}/")
+    print(folder)
 
     for file in files:
         paths.append(f'{file}')

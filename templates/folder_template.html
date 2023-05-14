@@ -6,13 +6,14 @@
 <body>
 	<h1>Links</h1>
     <ul>
-    {% for file in files %}
+        {% for file in files %}
         {% if file.endswith('.mp4') %}
-            <li><a href="{{ url_for('video_feed', folder=folder, filename=file) }}">{{ file }}</a></li>
+            <li><a href="{{ url_for('video_feed', folder=folder, filename=file) }}">{{ file }} play</a></li>
         {% else %}
-    </li><a href="/static/{{ folder }}/{{ file }}" download>{{ file }}</a></li>
+                <li><a href="/static/{{ folder }}/{{ file }}" download>{{ file }} download</a></li>
         {% endif %}
-        {% endfor %}
+    {% endfor %}
+    
     </ul>
     <a href="/static/crunchbang-11-20130506-i686.iso/crunchbang-11-20130506-i6867.iso">file</a>
 </body>
