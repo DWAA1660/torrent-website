@@ -11,11 +11,11 @@
         {% if file.endswith('.mp4') or file.endswith('.mkv') %}
             <li><a href="{{ url_for('video_feed', folder=folder, filename=file) }}">{{ file }} PLAY</a></li>
         {% else %}
-                <li><a href="/static/{{ folder }}/{{ file }}" download>{{ file }} DONLOAD</a></li>
+                <li><a href="/static/{{ folder }}/{{ file }}" download>{{ file }} DOWNLOAD</a></li>
         {% endif %}
     {% endfor %}
     
     </ul>
-    <a href="/static/crunchbang-11-20130506-i686.iso/crunchbang-11-20130506-i6867.iso">file</a>
+
 </body>
 </html>
