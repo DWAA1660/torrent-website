@@ -15,8 +15,8 @@ def index():
         torrents.append(torrent)
     print(torrents)
     return render_template('index.html', torrents=torrents)
-    
-    
+
+
 @app.route('/torrent_folder/<folder>', methods=['GET', 'POST'])
 def torrent_folder(folder):
     paths = []
@@ -29,6 +29,7 @@ def torrent_folder(folder):
     print(paths)
     return render_template("folder_template.html", files=files, folder=folder)
 
+
 @app.route('/torrent', methods=['GET', 'POST'])
 def torrent():
     if request.method == 'POST':
@@ -36,11 +37,14 @@ def torrent():
         print(url)
         task_thread = threading.Thread(target=download_torrent, args=[url])
         task_thread.start()
-        return f'Started downloading please give it some time'
+        return render_template('download.html')
     return render_template('form.html')
+
 
 @app.route('/video_feed/<folder>/<filename>')
 def video_feed(folder, filename):
     return render_template("video.html", folder=folder, filename=filename)
+
+
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0", port=6969)
