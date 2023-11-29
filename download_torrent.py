@@ -1,16 +1,16 @@
 import time
 import string
-import random
 import os
 import shutil
 import libtorrent as lt
 import ffmpeg
 import subprocess
+import secrets
 
 def generate_id():
     id = ""
     for i in range(18):
-        char = random.choice(string.ascii_letters + string.digits)
+        char = secrets.SystemRandom().choice(string.ascii_letters + string.digits)
         id = id + char
     return id
 
