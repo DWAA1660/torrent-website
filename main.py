@@ -36,7 +36,7 @@ def torrent():
         print(url)
         task_thread = threading.Thread(target=download_torrent, args=[url])
         task_thread.start()
-        return f'Started downloading please give it some time'
+        return 'Started downloading please give it some time'
     return render_template('form.html')
 
 @app.route('/video_feed/<folder>/<filename>')
