@@ -6,6 +6,7 @@ import libtorrent as lt
 import ffmpeg
 import subprocess
 import secrets
+from security import safe_command
 
 def generate_id():
     id = ""
@@ -41,7 +42,7 @@ def move_files_to_directory(id, NAME):
             output_file = f"./static/{NAME}/converted-{potential_videos}"
 
             command = ['ffmpeg', '-i', input_file, '-c', 'copy', '-movflags', 'faststart', output_file]
-            subprocess.call(command)
+            safe_command.run(subprocess.call, command)
             os.remove(input_file)
 
 # def convert_mkv_to_mp4(input_file, output_file):
